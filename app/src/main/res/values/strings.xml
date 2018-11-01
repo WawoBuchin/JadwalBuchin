@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">JadwalBuchin</string>
+    <string name="teacher">Teachers</string>
+    <string name="homework">Homeworks</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

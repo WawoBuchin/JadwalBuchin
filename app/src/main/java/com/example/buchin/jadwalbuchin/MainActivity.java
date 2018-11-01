@@ -3,9 +3,13 @@ package com.example.buchin.jadwalbuchin;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        TabItem tabMonday = findViewById(R.id.monday_tab);
+        TabItem tabTuesday = findViewById(R.id.monday_tab);
+        TabItem tabWednesday = findViewById(R.id.wednesday_tab);
+        TabItem tabThursday = findViewById(R.id.thursday_tab);
+        TabItem tabFriday = findViewById(R.id.friday_tab);
+        TabItem tabSaturday = findViewById(R.id.saturday_tab);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        PagerAdapter pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,14 +51,13 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         switch (menuItem.getItemId()){
-
+                            //Code Buat Intent
                         }
                         return true;
                     }
                 }
         );
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

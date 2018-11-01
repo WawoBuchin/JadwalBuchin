@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.nav_teacher :
                                 showTeacher();
                                 break;
-
+                            case R.id.nav_homework :
+                                showHomework();
+                                break;
                         }
                         return true;
                     }
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         showTeacher();
+        showHomework();
     }
 
     private void showTeacher() {
@@ -53,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment_container, teacherFragment);
+        ft.commit();
+    }
+    private void showHomework() {
+        HomeworkFragment homeworkFragment = new HomeworkFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_container, homeworkFragment);
         ft.commit();
     }
 

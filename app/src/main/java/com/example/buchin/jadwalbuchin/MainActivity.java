@@ -35,24 +35,14 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         switch (menuItem.getItemId()){
-                            case R.id.nav_teacher :
-                                showTeacher();
-                                break;
+
                         }
                         return true;
                     }
                 }
         );
-        showTeacher();
     }
 
-    private void showTeacher() {
-        TeacherFragment teacherFragment = new TeacherFragment();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment_container, teacherFragment);
-        ft.commit();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

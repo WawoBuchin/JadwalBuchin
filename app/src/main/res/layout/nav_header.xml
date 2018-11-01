@@ -6,12 +6,22 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:background="?attr/colorPrimaryDark"
-    android:gravity="bottom">
+    android:gravity="bottom"
+    android:background="@drawable/background_landscape"
+    >
     <TextView
         android:id="@+id/header_title_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
         android:text="Elia Brian Baskoro"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="12dp"
+        android:text="eliabrian@gmail.com"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 </LinearLayout>

@@ -16,10 +16,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        /*
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -53,21 +58,57 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         switch (menuItem.getItemId()){
+
                         }
                         return true;
                     }
                 }
-        );
+        );*/
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+
+        switch (item.getItemId()){
+            case R.id.nav_teachers:
+                startActivity(new Intent(this, TeacherActivity.class));
+                break;
+            case R.id.nav_grades:
+                startActivity(new Intent(this, GradeActivity.class));
+                break;
+            case R.id.nav_holidays:
+                startActivity(new Intent(this, HolidayActivity.class));
+                break;
+            case R.id.nav_reminders:
+                startActivity(new Intent(this, ReminderActivity.class));
+                break;
+            case R.id.nav_homeworks:
+                startActivity(new Intent(this, HomeWorkActivity.class));
+                break;
+            case R.id.nav_tests:
+                startActivity(new Intent(this, TestActivity.class));
+                break;
+        }
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 

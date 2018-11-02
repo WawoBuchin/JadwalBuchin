@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +17,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HolidayActivity"
+            android:label="Holidays"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TeacherActivity"
+            android:label="Teachers"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GradeActivity"
+            android:label="Average: "
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ReminderActivity"
+            android:label="Reminders"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".HomeWorkActivity"
+            android:label="Homeworks"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".TestActivity"
+            android:label="Calendar"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

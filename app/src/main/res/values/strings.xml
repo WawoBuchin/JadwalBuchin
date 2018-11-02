@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Jadwal Buchin</string>
     <string name="home">Home</string>
-    <string name="teacher">Teachers</string>
-    <string name="homework">Homeworks</string>
+    <string name="teachers">Teachers</string>
+    <string name="grades">Grades</string>
+    <string name="holidays">Holidays</string>
+    <string name="reminders">Reminders</string>
+    <string name="homeworks">Homeworks</string>
+    <string name="tests">Tests</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>

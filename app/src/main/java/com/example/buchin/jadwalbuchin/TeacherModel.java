@@ -3,6 +3,7 @@ package com.example.buchin.jadwalbuchin;
 public class TeacherModel {
     String ID_Teacher;
     String Name;
+    String Post;
     String Phone;
     String Email;
     String Office;
@@ -13,14 +14,23 @@ public class TeacherModel {
 
     }
 
-    public TeacherModel(String ID_Teacher, String name, String phone, String email, String office, String officeHours, String username) {
-        this.ID_Teacher = ID_Teacher;
+    public TeacherModel(String name, String post, String phone, String email, String office, String officeHours) {
         Name = name;
+        Post = post;
         Phone = phone;
         Email = email;
         Office = office;
         OfficeHours = officeHours;
-        Username = username;
+    }
+
+    public TeacherModel(String ID_Teacher, String name, String post, String phone, String email, String office, String officeHours) {
+        this.ID_Teacher = ID_Teacher;
+        Name = name;
+        Post = post;
+        Phone = phone;
+        Email = email;
+        Office = office;
+        OfficeHours = officeHours;
     }
 
     public String getID_Teacher() {
@@ -77,5 +87,13 @@ public class TeacherModel {
 
     public void setUsername(String username) {
         Username = username;
+    }
+
+    public String getPost() {
+        return Post;
+    }
+
+    public void setPost(String post) {
+        Post = post;
     }
 }

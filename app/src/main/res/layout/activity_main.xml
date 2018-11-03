@@ -32,6 +32,9 @@
                 android:background="@color/colorPrimary"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/colorWhite"
+                app:tabIndicatorColor="@color/colorYellow"
+                android:outlineSpotShadowColor="@color/colorShadow"
+                android:outlineAmbientShadowColor="@color/colorShadow"
                 app:tabTextColor="@color/colorPrimaryDark"
                 android:layout_below="@id/toolbar">
 

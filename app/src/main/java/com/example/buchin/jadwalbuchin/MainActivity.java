@@ -103,6 +103,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_tests:
                 startActivity(new Intent(this, TestActivity.class));
                 break;
+            case R.id.nav_login:
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
+            case R.id.nav_register:
+                startActivity(new Intent(this, RegisterActivity.class));
+                break;
         }
 
 

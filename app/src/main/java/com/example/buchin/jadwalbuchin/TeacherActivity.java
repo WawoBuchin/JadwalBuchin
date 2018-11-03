@@ -17,5 +17,8 @@ public class TeacherActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white);
+
     }
+
+
 }

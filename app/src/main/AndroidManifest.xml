@@ -33,12 +33,16 @@
             android:name=".ReminderActivity"
             android:label="Reminders"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".HomeWorkActivity"
+        <activity
+            android:name=".HomeWorkActivity"
             android:label="Homeworks"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".TestActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TestActivity"
             android:label="Calendar"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

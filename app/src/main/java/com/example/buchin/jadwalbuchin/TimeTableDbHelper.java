@@ -3,9 +3,11 @@ package com.example.buchin.jadwalbuchin;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.example.buchin.jadwalbuchin.Teacher.TeacherModel;
 
 import java.util.ArrayList;
 
@@ -65,8 +67,8 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
     // user table create statement
     private static final String CREATE_TABLE_TEACHER = " CREATE TABLE "
             + TABLE_TEACHER + "(" + COL_ID_TEACHER + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_NAME
-            + " TEXT,"+ COL_POST + " TEXT," + COL_PHONE + " TEXT," + COL_EMAIL + "TEXT," + COL_OFFICE
-            + "TEXT"+ COL_OFFICEHOURS + " TEXT,)";
+            + " TEXT,"+ COL_POST + " TEXT," + COL_PHONE + " TEXT," + COL_EMAIL + " TEXT," + COL_OFFICE
+            + " TEXT,"+ COL_OFFICEHOURS + " TEXT )";
 
     public TimeTableDbHelper(Context context, SQLiteDatabase.CursorFactory factory){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -112,11 +114,45 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         ArrayList<TeacherModel> listTeacher = new ArrayList<>();
         String sql = " SELECT * FROM " + TABLE_TEACHER;
         Cursor cursor = db.rawQuery(sql,null);
-        cursor.moveToFirst();
-        do{
-            listTeacher.add(new TeacherModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
-                    cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6)));
-        }while(cursor.moveToNext());
+        Log.d("haha", "kosong" + cursor.getCount());
+        if(cursor != null && cursor.moveToFirst()){
+
+            cursor.moveToFirst();
+            do{
+                listTeacher.add(new TeacherModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6)));
+            }while(cursor.moveToNext());
+        }
         return listTeacher;
+    }
+
+    public void deleteTeacher(String id_Teacher){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_TEACHER,"id_teacher = ?", new String[]{id_Teacher});
+    }
+
+    public void updateTeacher(TeacherModel teacher){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_NAME, teacher.getName());
+        values.put(COL_POST, teacher.getPost());
+        values.put(COL_PHONE, teacher.getPhone());
+        values.put(COL_EMAIL, teacher.getEmail());
+        values.put(COL_OFFICE, teacher.getOffice());
+        values.put(COL_OFFICEHOURS, teacher.getOfficeHours());
+
+        db.update(TABLE_TEACHER, values,"id_teacher = ?" , new String[]{teacher.getID_Teacher()});
+        db.close();
+    }
+
+    public TeacherModel getDataTeacher(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_TEACHER + " WHERE " + COL_ID_TEACHER + " = " + id ;
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        return new TeacherModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
+
     }
 }

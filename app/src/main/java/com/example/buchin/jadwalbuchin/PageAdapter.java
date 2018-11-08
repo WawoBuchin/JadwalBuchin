@@ -1,10 +1,15 @@
 package com.example.buchin.jadwalbuchin;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.widget.Switch;
+
+import com.example.buchin.jadwalbuchin.FragmentHari.FridayFragment;
+import com.example.buchin.jadwalbuchin.FragmentHari.MondayFragment;
+import com.example.buchin.jadwalbuchin.FragmentHari.SaturdayFragment;
+import com.example.buchin.jadwalbuchin.FragmentHari.ThursdayFragment;
+import com.example.buchin.jadwalbuchin.FragmentHari.TuesdayFragment;
+import com.example.buchin.jadwalbuchin.FragmentHari.WednesdayFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 

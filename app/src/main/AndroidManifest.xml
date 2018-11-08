@@ -19,30 +19,28 @@
         </activity>
         <activity
             android:name=".HolidayActivity"
-            android:label="Holidays"
-            android:parentActivityName=".MainActivity" />
+            android:label="Holidays" />
         <activity
-            android:name=".TeacherActivity"
-            android:label="Teachers"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Teacher.TeacherActivity"
+            android:label="Teachers" />
         <activity
             android:name=".GradeActivity"
-            android:label="Average: "
-            android:parentActivityName=".MainActivity" />
+            android:label="Average: " />
         <activity
             android:name=".ReminderActivity"
-            android:label="Reminders"
-            android:parentActivityName=".MainActivity" />
+            android:label="Reminders" />
         <activity
             android:name=".HomeWorkActivity"
-            android:label="Homeworks"
-            android:parentActivityName=".MainActivity" />
+            android:label="Homeworks" />
         <activity
             android:name=".TestActivity"
-            android:label="Calendar"
-            android:parentActivityName=".MainActivity" />
+            android:label="Calendar" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".Teacher.InsertTeacher"
+            android:label="Add Teacher" />
+        <activity android:name=".Teacher.EditTeacher"></activity>
     </application>
 
 </manifest>

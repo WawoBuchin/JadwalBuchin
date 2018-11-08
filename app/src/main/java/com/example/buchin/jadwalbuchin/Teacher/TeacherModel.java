@@ -1,4 +1,4 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.Teacher;
 
 public class TeacherModel {
     String ID_Teacher;

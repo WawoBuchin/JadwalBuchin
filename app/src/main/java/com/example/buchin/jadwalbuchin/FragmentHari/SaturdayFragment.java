@@ -1,10 +1,12 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.FragmentHari;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.buchin.jadwalbuchin.R;
 
 
 public class SaturdayFragment extends Fragment {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TeacherActivity">
+    tools:context=".Teacher.TeacherActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,93 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Name"
-                            android:inputType="" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etPost"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Post"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etPhone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Phone"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Email"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etOffice"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Office"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etOfficehour"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Office Hours"/>
-                    </LinearLayout>
-                    <Button
-                        android:id="@+id/btnSimpanTeacher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Simpan"/>
-                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/tempatTeacher"
                     android:layout_width="match_parent"
@@ -120,10 +33,10 @@
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
+                        android:id="@+id/listTeacher"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
-            </LinearLayout>
 
         </ScrollView>
 

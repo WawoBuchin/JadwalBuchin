@@ -1,4 +1,4 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.FragmentHari;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,13 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.buchin.jadwalbuchin.R;
 
-public class WednesdayFragment extends Fragment {
 
-    public WednesdayFragment() {
+public class ThursdayFragment extends Fragment {
+
+    public ThursdayFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class WednesdayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wednesday, container, false);
+        return inflater.inflate(R.layout.fragment_thursday, container, false);
     }
 
 }

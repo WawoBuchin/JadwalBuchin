@@ -35,16 +35,21 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
 
     // Common column names String username, String password, String name, String email
     // User Table - column names
-    private static final String COL_USERNAME = "username";
-    private static final String COL_PASSWORD = "password";
-    private static final String COL_NAME = "name";
-    private static final String COL_EMAIL = "email";
+    private static final String COL_USER_PASSWORD = "password";
+    private static final String COL_USER_NAME = "name";
+    private static final String COL_USER_EMAIL = "email";
 
     // Table Create Statements
+/*
+    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER +
+            "(" + COL_USER_NAME + " TEXT," + COL_USER_EMAIL + " TEXT PRIMARY KEY," + COL_USER_PASSWORD + " TEXT)";
+*/
     // user table create statement
-    private static final String CREATE_TABLE_USER = "CREATE TABLE "
+    /*private static final String CREATE_TABLE_USER = "CREATE TABLE "
             + TABLE_USER + "(" + COL_USERNAME + " TEXT PRIMARY KEY," + COL_NAME
             + " TEXT," + COL_PASSWORD + " TEXT," + COL_PASSWORD + "TEXT," + COL_EMAIL + "TEXT )";
+*/
+
 
     // Holiday Table - column names
     private static final String COL_ID_HOLIDAY = "id_holiday";
@@ -56,13 +61,13 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
 
     // Teacher Table - column names
     private static final String COL_ID_TEACHER = "id_teacher";
-    //private static final String COL_NAME = "name";
+    private static final String COL_NAME = "name";
     private static final String COL_POST = "post";
     private static final String COL_PHONE = "phone";
-    //private static final String COL_EMAIL = "email";
+    private static final String COL_EMAIL = "email";
     private static final String COL_OFFICE = "office";
     private static final String COL_OFFICEHOURS = "officehours";
-    //private static final String COL_USERNAME = "username";
+    private static final String COL_USERNAME = "username";
 
     // user table create statement
     private static final String CREATE_TABLE_TEACHER = " CREATE TABLE "
@@ -75,18 +80,19 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
     }
 
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
+        db.execSQL("CREATE TABLE " + TABLE_USER +
+                "(" + COL_USER_NAME + " TEXT," + COL_USER_EMAIL + " TEXT PRIMARY KEY," + COL_USER_PASSWORD + " TEXT)");
         db.execSQL(CREATE_TABLE_TEACHER);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         // create new tables
         onCreate(db);
     }
@@ -109,6 +115,17 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         return sequence;
     }
 
+    public long insertUser(UserModel user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_USER_NAME, user.getUserName());
+        values.put(COL_USER_EMAIL, user.getUserEmail());
+        values.put(COL_USER_PASSWORD, user.getUserPassword());
+
+        long sequence = db.insert(TABLE_USER, null, values);
+        return sequence;
+    }
+
     public ArrayList<TeacherModel> getAllTeacher(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<TeacherModel> listTeacher = new ArrayList<>();
@@ -125,6 +142,8 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         }
         return listTeacher;
     }
+
+
 
     public void deleteTeacher(String id_Teacher){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -154,5 +173,12 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         return new TeacherModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
                 cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
 
+    }
+
+    public UserModel getDataUser(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_USER + " WHERE " + COL_USER_EMAIL + " = '" + email + "'";
+        Cursor cursor = db.rawQuery(sql, null);
+        return new UserModel(cursor.getString(0), cursor.getString(1), cursor.getString(2));
     }
 }

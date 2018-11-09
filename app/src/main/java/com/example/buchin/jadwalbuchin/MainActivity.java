@@ -12,17 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.buchin.jadwalbuchin.Teacher.TeacherActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        session = new Session(MainActivity.this);
+        session.checkLogin();
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         TabItem tabMonday = findViewById(R.id.monday_tab);
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
         /*
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -68,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                TimeTableDbHelper db = new TimeTableDbHelper(this, null);
+                session = new Session(MainActivity.this);
+                TextView txtEmail = (TextView)findViewById(R.id.header_title_2);
+                txtEmail.setText(session.getKeyEmail());
                 mDrawerLayout.openDrawer(GravityCompat.START);
 
                 return true;
@@ -99,11 +109,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_tests:
                 startActivity(new Intent(this, TestActivity.class));
                 break;
-            case R.id.nav_login:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-            case R.id.nav_register:
-                startActivity(new Intent(this, RegisterActivity.class));
+            case R.id.nav_logout:
+                session.logoutUserId();
+                this.finish();
                 break;
         }
 
@@ -112,6 +120,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 }

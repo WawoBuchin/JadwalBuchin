@@ -16,6 +16,7 @@
     <string name="upcoming">Upcoming</string>
     <string name="completed">Completed</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

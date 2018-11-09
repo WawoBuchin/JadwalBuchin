@@ -14,14 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:text="Elia Brian Baskoro"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textSize="24sp"
+        android:text="Hello, "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
     <TextView
+        android:id="@+id/header_title_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:text="eliabrian@gmail.com"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 </LinearLayout>

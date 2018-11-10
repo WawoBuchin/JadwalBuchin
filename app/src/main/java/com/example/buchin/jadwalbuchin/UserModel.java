@@ -1,30 +1,28 @@
 package com.example.buchin.jadwalbuchin;
 
 public class UserModel {
+    private int UserId;
+    private String UserName;
+    private String UserEmail;
+    private String UserPassword;
 
-    String UserPassword;
-    String UserName;
-    String UserEmail;
+    public UserModel(){
 
-    public UserModel(String userName, String userEmail, String userPassword) {
+    }
+
+    public UserModel(int userId, String userName, String userEmail, String userPassword) {
+        UserId = userId;
         UserName = userName;
         UserEmail = userEmail;
         UserPassword = userPassword;
     }
-    //String Foto;
 
-
-    public UserModel( String userEmail, String userPassword) {
-        UserEmail = userEmail;
-        UserPassword = userPassword;
+    public int getUserId() {
+        return UserId;
     }
 
-    public String getUserPassword() {
-        return UserPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        UserPassword = userPassword;
+    public void setUserId(int userId) {
+        UserId = userId;
     }
 
     public String getUserName() {
@@ -41,5 +39,13 @@ public class UserModel {
 
     public void setUserEmail(String userEmail) {
         UserEmail = userEmail;
+    }
+
+    public String getUserPassword() {
+        return UserPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        UserPassword = userPassword;
     }
 }

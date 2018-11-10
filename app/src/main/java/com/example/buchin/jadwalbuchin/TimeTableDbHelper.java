@@ -7,11 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.buchin.jadwalbuchin.FragmentHari.Schedule_Model;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TimeTableDbHelper extends SQLiteOpenHelper {
 
@@ -37,15 +35,15 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
 
     // Common column names String username, String password, String name, String email
     // User Table - column names
-    private static final String COL_USER_PASSWORD = "password";
+    private static final String COL_USER_ID = "id";
     private static final String COL_USER_NAME = "name";
     private static final String COL_USER_EMAIL = "email";
+    private static final String COL_USER_PASSWORD = "password";
 
     // Table Create Statements
-
-    // user table create statement
-    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER +
-                "(" + COL_USER_NAME + " TEXT," + COL_USER_EMAIL + " TEXT PRIMARY KEY," + COL_USER_PASSWORD + " TEXT)";
+    private static final String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
+            + COL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_USER_NAME + " TEXT, "
+            + COL_USER_EMAIL + " TEXT, " + COL_USER_PASSWORD + " TEXT)";
 
 
     // Holiday Table - column names
@@ -94,7 +92,7 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
-        db.execSQL(CREATE_TABLE_USER);
+        db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_TABLE_TEACHER);
         db.execSQL(CREATE_TABLE_SCHEDULE);
     }
@@ -104,7 +102,6 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         // create new tables
         onCreate(db);
     }
@@ -119,7 +116,6 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         values.put(COL_EMAIL, teacher.getEmail());
         values.put(COL_OFFICE, teacher.getOffice());
         values.put(COL_OFFICEHOURS, teacher.getOfficeHours());
-        values.put(COL_USER, teacher.getUser_Email());
 
         // insert row
         long sequence = db.insert(TABLE_TEACHER, null, values);
@@ -128,15 +124,117 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         return sequence;
     }
 
-    public long insertUser(UserModel user){
+    /*Method untuk membuat user*/
+    public void insertUser( UserModel user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_USER_NAME, user.getUserName());
         values.put(COL_USER_EMAIL, user.getUserEmail());
         values.put(COL_USER_PASSWORD, user.getUserPassword());
+        db.insert(TABLE_USER, null, values);
 
-        long sequence = db.insert(TABLE_USER, null, values);
-        return sequence;
+    }
+
+    /*Method untuk mengambil dan me-return semua list user*/
+    public List<UserModel> getAllUser(){
+        String[] col = {
+                COL_USER_ID, COL_USER_NAME, COL_USER_EMAIL, COL_USER_PASSWORD
+        };
+        String sortOrder = COL_USER_NAME + " ASC";
+
+        List<UserModel>userList = new ArrayList<UserModel>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USER,
+                col, null, null, null, null, sortOrder);
+        if(cursor.moveToFirst()){
+            do {
+                UserModel user = new UserModel();
+                user.setUserId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COL_USER_ID))));
+                user.setUserName(cursor.getString(cursor.getColumnIndex(COL_USER_NAME)));
+                user.setUserEmail(cursor.getString(cursor.getColumnIndex(COL_USER_EMAIL)));
+                user.setUserPassword(cursor.getString(cursor.getColumnIndex(COL_USER_PASSWORD)));
+                userList.add(user);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return userList;
+    }
+
+    /*Method untuk update user*/
+    public void updateUser(UserModel user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_USER_NAME, user.getUserName());
+        values.put(COL_USER_EMAIL, user.getUserEmail());
+        values.put(COL_USER_PASSWORD, user.getUserPassword());
+        db.update(TABLE_USER, values, COL_USER_ID + " = ?", new String[]{String.valueOf(user.getUserId())});
+        db.close();
+    }
+
+    /*Method untuk hapus user*/
+    public void deleteUser(UserModel user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_USER, COL_USER_ID + " = ?", new String[]{String.valueOf(user.getUserId())});
+    }
+
+    /*Method untuk memastkan user sudah ada atau belum*/
+    public boolean checkUser(String email){
+        String[] col ={COL_USER_ID};
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = COL_USER_EMAIL + " = ?";
+        String[]selectionArgs = {email};
+        Cursor cursor = db.query(TABLE_USER, col, selection, selectionArgs, null, null, null);
+        int cursorCount = cursor.getCount();
+
+        if(cursorCount > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public String getColUserEmail(){
+        String username = "";
+        Cursor cursor = this.getReadableDatabase().query(TABLE_USER, new String[]{COL_USER_EMAIL}, null, null, null, null, null);
+        int cursorCount = cursor.getCount();
+        if (cursorCount > 0){
+            cursor.moveToFirst();
+            do{
+                username = cursor.getString(0);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return username;
+    }
+
+    public String getColUserName(){
+        String username = "";
+        Cursor cursor = this.getReadableDatabase().query(TABLE_USER, new String[]{COL_USER_NAME}, null, null, null, null, null);
+        int cursorCount = cursor.getCount();
+        if (cursorCount > 0){
+            cursor.moveToFirst();
+            do{
+                username = cursor.getString(0);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return username;
+    }
+
+    public boolean checkUser(String email, String password){
+        String[] col ={COL_USER_ID};
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = COL_USER_EMAIL + " = ?" + " AND " + COL_USER_PASSWORD + " = ?";
+        String[]selectionArgs = {email, password};
+        Cursor cursor = db.query(TABLE_USER, col, selection, selectionArgs, null, null, null);
+        int cursorCount = cursor.getCount();
+        if (cursorCount > 0){
+            return true;
+        }
+        return false;
+
     }
 
     public ArrayList<TeacherModel> getAllTeacher(String user){
@@ -270,13 +368,6 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return new Schedule_Model(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
 
-    }
-
-    public UserModel getDataUser(String email){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT * FROM " + TABLE_USER + " WHERE " + COL_USER_EMAIL + " = '" + email + "'";
-        Cursor cursor = db.rawQuery(sql, null);
-        return new UserModel(cursor.getString(0), cursor.getString(1), cursor.getString(2));
     }
 
 

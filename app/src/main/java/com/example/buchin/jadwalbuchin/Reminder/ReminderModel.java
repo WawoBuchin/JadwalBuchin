@@ -1,4 +1,4 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.Reminder;
 
 public class ReminderModel {
     String ID_Reminder;
@@ -7,12 +7,12 @@ public class ReminderModel {
     String Description;
     String Date;
     String Time;
-    String ID_Color;
+    //String ID_Color;
 
     public ReminderModel() {
     }
 
-    public ReminderModel(String ID_Reminder, String username, String tittle, String description, String date, String time, String ID_Color) {
+    /*public ReminderModel(String ID_Reminder, String username, String tittle, String description, String date, String time, String ID_Color) {
         this.ID_Reminder = ID_Reminder;
         Username = username;
         Tittle = tittle;
@@ -20,6 +20,22 @@ public class ReminderModel {
         Date = date;
         Time = time;
         this.ID_Color = ID_Color;
+    }
+    */
+
+    public ReminderModel(String tittle, String description, String date, String time) {
+        Tittle = tittle;
+        Description = description;
+        Date = date;
+        Time = time;
+    }
+
+    public ReminderModel(String ID_Reminder, String tittle, String description, String date, String time) {
+        this.ID_Reminder = ID_Reminder;
+        Tittle = tittle;
+        Description = description;
+        Date = date;
+        Time = time;
     }
 
     public String getID_Reminder() {
@@ -70,11 +86,11 @@ public class ReminderModel {
         Time = time;
     }
 
-    public String getID_Color() {
+    /*public String getID_Color() {
         return ID_Color;
     }
 
     public void setID_Color(String ID_Color) {
         this.ID_Color = ID_Color;
-    }
+    }*/
 }

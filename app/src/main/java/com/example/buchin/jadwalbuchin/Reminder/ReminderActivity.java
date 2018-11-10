@@ -1,9 +1,11 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.Reminder;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.example.buchin.jadwalbuchin.R;
 
 public class ReminderActivity extends AppCompatActivity {
 

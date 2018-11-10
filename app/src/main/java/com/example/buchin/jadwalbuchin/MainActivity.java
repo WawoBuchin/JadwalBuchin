@@ -2,7 +2,6 @@ package com.example.buchin.jadwalbuchin;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -17,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.buchin.jadwalbuchin.Reminder.ReminderActivity;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -120,9 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_teachers:
                 startActivity(new Intent(this, TeacherActivity.class));
                 break;
-            case R.id.nav_grades:
-                startActivity(new Intent(this, GradeActivity.class));
-                break;
             case R.id.nav_holidays:
                 startActivity(new Intent(this, HolidayActivity.class));
                 break;
@@ -132,13 +129,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_homeworks:
                 startActivity(new Intent(this, HomeWorkActivity.class));
                 break;
-            case R.id.nav_tests:
-                startActivity(new Intent(this, TestActivity.class));
-                break;
             case R.id.nav_logout:
                 logOut();
                 break;
         }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.buchin.jadwalbuchin.Reminder.ReminderModel;
 import com.example.buchin.jadwalbuchin.FragmentHari.Schedule_Model;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherModel;
 
@@ -32,8 +33,6 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_SCHEDULE = "schedule";
     private static final String TABLE_PROPOSAL = "proposal";
     private static final String TABLE_REMINDER = "reminder";
-    private static final String TABLE_TEST = "test";
-    private static final String TABLE_HOLIDAY = "holiday";
 
     // Common column names String username, String password, String name, String email
     // User Table - column names
@@ -47,13 +46,6 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
             + COL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_USER_NAME + " TEXT, "
             + COL_USER_EMAIL + " TEXT, " + COL_USER_PASSWORD + " TEXT)";
 
-
-    // Holiday Table - column names
-    private static final String COL_ID_HOLIDAY = "id_holiday";
-    private static final String COL_DESCRIPTION = "description";
-    private static final String COL_FROM = "from";
-    private static final String COL_TO = "email";
-    private static final String COL_ID_COLOR = "id_color";
 
 
     // Teacher Table - column names
@@ -86,6 +78,22 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
             + " TEXT,"+ COL_SCHEDULE_TEACHER + " TEXT," + COL_SCHEDULE_ROOM + " TEXT," + COL_SCHEDULE_TIME + " TEXT," + COL_SCHEDULE_DAY
             + " TEXT,"+ COL_USER +" TEXT )";
 
+    // Reminder Table - column names
+    private static final String COL_ID_REMINDER = "id_reminder";
+    //private static final String COL_USERNAME = "username";
+    private static final String COL_TITLE = "title";
+    private static final String COL_DESCRIPTION = "description";
+    private static final String COL_DATE = "date";
+    private static final String COL_TIME = "time";
+    //private static final String COL_ID_COLOR = "id_color";
+
+
+    // reminder table create statement
+    private static final String CREATE_TABLE_REMINDER = " CREATE TABLE "
+            + TABLE_REMINDER + "(" + COL_ID_REMINDER + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_TITLE
+            + " TEXT,"+ COL_DESCRIPTION + " TEXT," + COL_DATE + " TEXT," + COL_TIME + " TEXT )";
+
+
     public TimeTableDbHelper(Context context, SQLiteDatabase.CursorFactory factory){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -97,6 +105,7 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_TABLE_TEACHER);
         db.execSQL(CREATE_TABLE_SCHEDULE);
+        db.execSQL(CREATE_TABLE_REMINDER);
     }
 
     @Override
@@ -105,6 +114,7 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_REMINDER);
         // create new tables
         onCreate(db);
     }
@@ -375,6 +385,71 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         return new Schedule_Model(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
 
     }
+    //REMINDER CRUD
+    public long insertReminder(ReminderModel reminder) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(COL_TITLE, reminder.getTittle());
+        values.put(COL_DESCRIPTION, reminder.getDescription());
+        values.put(COL_DATE, reminder.getDate());
+        values.put(COL_TIME, reminder.getTime());
+        //values.put(COL_ID_COLOR, reminder.getID_Color());
+
+        // insert row
+        long sequence = db.insert(TABLE_REMINDER, null, values);
+
+
+        return sequence;
+    }
+
+
+    public ArrayList<ReminderModel> getAllReminder(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<ReminderModel> listReminder = new ArrayList<>();
+        String sql = " SELECT * FROM " + TABLE_REMINDER;
+        Cursor cursor = db.rawQuery(sql,null);
+        Log.d("haha", "kosong" + cursor.getCount());
+        if(cursor != null && cursor.moveToFirst()){
+
+            cursor.moveToFirst();
+            do{
+                listReminder.add(new ReminderModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4)));
+            }while(cursor.moveToNext());
+        }
+        return listReminder;
+    }
+
+
+
+    public void deleteReminder(String id_Reminder){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_REMINDER,"id_reminder = ?", new String[]{id_Reminder});
+    }
+
+    public void updateReminder(ReminderModel reminder){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_TITLE, reminder.getTittle());
+        values.put(COL_DESCRIPTION, reminder.getDescription());
+        values.put(COL_DATE, reminder.getDate());
+        values.put(COL_TIME, reminder.getTime());
+        //values.put(COL_ID_COLOR, reminder.getID_Color());
+
+        db.update(TABLE_REMINDER, values,"id_reminder = ?" , new String[]{reminder.getID_Reminder()});
+        db.close();
+    }
+
+    public ReminderModel getDataReminder(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_REMINDER + " WHERE " + COL_ID_REMINDER + " = " + id ;
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        return new ReminderModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                cursor.getString(3), cursor.getString(4));
+
+    }
 
 }

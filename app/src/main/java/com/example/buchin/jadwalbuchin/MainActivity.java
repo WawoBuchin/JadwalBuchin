@@ -2,7 +2,6 @@ package com.example.buchin.jadwalbuchin;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -17,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.buchin.jadwalbuchin.Reminder.ReminderActivity;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 logOut();
                 break;
         }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

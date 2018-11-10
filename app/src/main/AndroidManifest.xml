@@ -25,6 +25,9 @@
             android:label="Teachers" />
         <activity
             android:name=".ReminderActivity"
+            android:label="Average: " />
+        <activity
+            android:name=".Reminder.ReminderActivity"
             android:label="Reminders" />
         <activity
             android:name=".HomeWorkActivity"
@@ -40,6 +43,9 @@
         <activity android:name=".Teacher.EditTeacher" />
         <activity android:name=".FragmentHari.Insert_Schedule" />
         <activity android:name=".FragmentHari.Edit_Schedule"></activity>
+        <activity android:name=".Teacher.EditTeacher" />
+        <activity android:name=".Reminder.InsertReminder" />
+        <activity android:name=".Reminder.EditReminder"></activity>
     </application>
 
 </manifest>

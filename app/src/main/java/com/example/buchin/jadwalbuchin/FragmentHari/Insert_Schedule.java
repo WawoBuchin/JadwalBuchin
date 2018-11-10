@@ -14,7 +14,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
+import com.example.buchin.jadwalbuchin.SessionManager;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 import java.util.ArrayList;
@@ -27,13 +27,14 @@ public class Insert_Schedule extends AppCompatActivity implements View.OnClickLi
     String teacher,day;
     EditText et_SubjectName,et_SubjectRoom;
     FloatingActionButton fabSimpan;
-    Session session;
+    SessionManager sessionManager;
+    TimeTableDbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_schedule);
 
-        session = new Session(Insert_Schedule.this);
+        sessionManager = new SessionManager(this);
         day = getIntent().getStringExtra("day");
         from = (TextView) findViewById(R.id.insert_subject_from);
         to = (TextView) findViewById(R.id.insert_subject_to);
@@ -91,10 +92,10 @@ public class Insert_Schedule extends AppCompatActivity implements View.OnClickLi
 
     private void loadSpinnerData(){
         // database handler
-        TimeTableDbHelper db = new TimeTableDbHelper(this,null);
+        TimeTableDbHelper dbHelper = new TimeTableDbHelper(this,null);
 
         // Spinner Drop down elements
-        List<String> lables = db.getAllTeachers(session.getKeyEmail());
+        List<String> lables = dbHelper.getAllTeachers(dbHelper.getColUserEmail());
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -113,13 +114,13 @@ public class Insert_Schedule extends AppCompatActivity implements View.OnClickLi
             //Toast.makeText(getBaseContext(),"Data Saved" + et_SubjectName.getText().toString() + teacher + et_SubjectRoom.getText().toString(),Toast.LENGTH_SHORT).show();
             if(!et_SubjectName.getText().toString().equals("") && !teacher.equals(" please select ") && !et_SubjectRoom.getText().toString().equals("")
                     && !to.getText().equals("") && !from.getText().equals("")){
-                TimeTableDbHelper dbAdapter = new TimeTableDbHelper(getBaseContext(), null);
+                TimeTableDbHelper dbHelper = new TimeTableDbHelper(getBaseContext(), null);
                 String name = et_SubjectName.getText().toString();
                 String room = et_SubjectRoom.getText().toString();
                 String time = from.getText().toString() + " - " + to.getText().toString();
 
-                Schedule_Model schedule = new Schedule_Model(name,teacher,room,time,day,session.getKeyEmail());
-                if(dbAdapter.insertSchedule(schedule) != -1){
+                Schedule_Model schedule = new Schedule_Model(name,teacher,room,time,day,dbHelper.getColUserEmail());
+                if(dbHelper.insertSchedule(schedule) != -1){
                     Toast.makeText(getBaseContext(),"Data Saved",Toast.LENGTH_SHORT).show();
                     //kosongkanData();
                     //startActivity(new Intent(this, TeacherActivity.class));
@@ -127,7 +128,7 @@ public class Insert_Schedule extends AppCompatActivity implements View.OnClickLi
                 } else{
                     Toast.makeText(getBaseContext(),"Data Error",Toast.LENGTH_SHORT).show();
                 }
-                dbAdapter.close();
+                dbHelper.close();
             } else{
                 Toast.makeText(getBaseContext(),"please fill in the empty field",Toast.LENGTH_SHORT).show();
             }

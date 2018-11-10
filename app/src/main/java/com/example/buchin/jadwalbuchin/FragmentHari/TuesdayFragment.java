@@ -14,14 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 
 public class TuesdayFragment extends Fragment {
     RecyclerView rv;
     FloatingActionButton bu;
-    Session session;
+    TimeTableDbHelper dbHelper;
     Context context;
     ScheduleRecyclerViewAdapter adapter;
     String day = "Tuesday";
@@ -36,47 +35,48 @@ public class TuesdayFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_tuesday, container, false);
     }
 
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        session = new Session(context);
-//        rv = getActivity().findViewById(R.id.list_schedule);
-//        rv.setHasFixedSize(true);
-//        LinearLayoutManager llm = new LinearLayoutManager(context);
-//        rv.setLayoutManager(llm);
-//        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(session.getKeyEmail(),day));
-//        rv.setAdapter(adapter);
-//        bu = getActivity().findViewById(R.id.fab);
-//        bu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getActivity(), Insert_Schedule.class);
-//                i.putExtra("day",day);
-//                getActivity().startActivity(i);
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        session = new Session(context);
-//        rv = getActivity().findViewById(R.id.list_schedule);
-//        rv.setHasFixedSize(true);
-//        LinearLayoutManager llm = new LinearLayoutManager(context);
-//        rv.setLayoutManager(llm);
-//        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(session.getKeyEmail(),day));
-//        rv.setAdapter(adapter);
-//        bu = getActivity().findViewById(R.id.fab);
-//        bu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getActivity(), Insert_Schedule.class);
-//                i.putExtra("day",day);
-//                getActivity().startActivity(i);
-//
-//            }
-//        });
-//
-//    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        dbHelper = new TimeTableDbHelper(context,null);
+        rv = getActivity().findViewById(R.id.list_schedule);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        rv.setLayoutManager(llm);
+        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),day));
+        rv.setAdapter(adapter);
+        bu = getActivity().findViewById(R.id.fab);
+        bu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Insert_Schedule.class);
+                i.putExtra("day",day);
+                getActivity().startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rv = getActivity().findViewById(R.id.list_schedule);
+
+        dbHelper = new TimeTableDbHelper(context,null);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        rv.setLayoutManager(llm);
+        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),day));
+        rv.setAdapter(adapter);
+        bu = getActivity().findViewById(R.id.fab);
+        bu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Insert_Schedule.class);
+                i.putExtra("day",day);
+                getActivity().startActivity(i);
+
+            }
+        });
+
+    }
 }

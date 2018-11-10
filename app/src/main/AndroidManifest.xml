@@ -24,9 +24,6 @@
             android:name=".Teacher.TeacherActivity"
             android:label="Teachers" />
         <activity
-            android:name=".GradeActivity"
-            android:label="Average: " />
-        <activity
             android:name=".ReminderActivity"
             android:label="Reminders" />
         <activity

@@ -15,7 +15,7 @@ import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 public class EditTeacher extends AppCompatActivity implements View.OnClickListener {
     EditText txtName, txtPost, txtPhone, txtEmail, txtOffice,txtOfficeHour;
     FloatingActionButton bSimpan;
-    TimeTableDbHelper dbAdapter;
+    TimeTableDbHelper dbHelper;
     String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class EditTeacher extends AppCompatActivity implements View.OnClickListen
         txtOffice = (EditText) findViewById(R.id.etOffice);
         txtOfficeHour = (EditText) findViewById(R.id.etOfficehour);
 
-        dbAdapter = new TimeTableDbHelper(this,null);
-        TeacherModel teacher = dbAdapter.getDataTeacher(id);
+        dbHelper = new TimeTableDbHelper(this,null);
+        TeacherModel teacher = dbHelper.getDataTeacher(id);
         bSimpan = findViewById(R.id.fab_simpan);
         bSimpan.setOnClickListener(this);
 
@@ -62,7 +62,7 @@ public class EditTeacher extends AppCompatActivity implements View.OnClickListen
             String officehour = txtOfficeHour.getText().toString();
 
             TeacherModel teacher = new TeacherModel(id,nama,post,phone,email,office,officehour);
-            dbAdapter.updateTeacher(teacher);
+            dbHelper.updateTeacher(teacher);
             Toast.makeText(this,"Berhasil Di update",Toast.LENGTH_SHORT).show();
             onBackPressed();
             //startActivity(new Intent(this, TeacherActivity.class));

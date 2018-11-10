@@ -10,19 +10,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
+import com.example.buchin.jadwalbuchin.SessionManager;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 public class InsertTeacher extends AppCompatActivity implements View.OnClickListener {
     EditText txtName, txtPost, txtPhone, txtEmail, txtOffice,txtOfficeHour;
     FloatingActionButton fabSimpan;
-    Session session;
+    SessionManager sessionManager;
+    TimeTableDbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_teacher);
 
-        session = new Session(InsertTeacher.this);
+        sessionManager = new SessionManager(this);
+
+        //Toast.makeText(getBaseContext(),"Data Saved" +dbHelper.getColUserEmail(),Toast.LENGTH_SHORT).show();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
@@ -44,16 +47,16 @@ public class InsertTeacher extends AppCompatActivity implements View.OnClickList
         if(view.getId() == R.id.fab_simpan){
             if(!txtName.getText().toString().equals("") && !txtPost.getText().toString().equals("") && !txtPhone.getText().toString().equals("")
                     && !txtEmail.getText().toString().equals("") && !txtOffice.getText().toString().equals("") && !txtOfficeHour.getText().toString().equals("")){
-                TimeTableDbHelper dbAdapter = new TimeTableDbHelper(getBaseContext(), null);
+                 dbHelper = new TimeTableDbHelper(getBaseContext(), null);
                 String name = txtName.getText().toString();
                 String post = txtPost.getText().toString();
                 String phone = txtPhone.getText().toString();
                 String email = txtEmail.getText().toString();
                 String office = txtOffice.getText().toString();
                 String officehour = txtOfficeHour.getText().toString();
-
-                TeacherModel teacher = new TeacherModel(session.getKeyEmail(),name,post,phone,email,office,officehour);
-                if(dbAdapter.insertTeacher(teacher) != -1){
+                Toast.makeText(getBaseContext(),"Data Saved" +dbHelper.getColUserEmail(),Toast.LENGTH_SHORT).show();
+                TeacherModel teacher = new TeacherModel(dbHelper.getColUserEmail(),name,post,phone,email,office,officehour);
+                if(dbHelper.insertTeacher(teacher) != -1){
                     Toast.makeText(getBaseContext(),"Data Saved",Toast.LENGTH_SHORT).show();
                     //kosongkanData();
                     //startActivity(new Intent(this, TeacherActivity.class));
@@ -61,7 +64,7 @@ public class InsertTeacher extends AppCompatActivity implements View.OnClickList
                 } else{
                     Toast.makeText(getBaseContext(),"Data Error",Toast.LENGTH_SHORT).show();
                 }
-                dbAdapter.close();
+                dbHelper.close();
             } else{
                 Toast.makeText(getBaseContext(),"please fill in the empty field",Toast.LENGTH_SHORT).show();
             }

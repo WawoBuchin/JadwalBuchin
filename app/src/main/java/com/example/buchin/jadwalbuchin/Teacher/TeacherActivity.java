@@ -13,21 +13,23 @@ import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.MainActivity;
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
+import com.example.buchin.jadwalbuchin.SessionManager;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 public class TeacherActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView rv;
     FloatingActionButton bu;
     TeacherRecyclerViewAdapter adapter;
-    Session session;
+    private TimeTableDbHelper dbHelper;
+    private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
 
-        session = new Session(TeacherActivity.this);
-        Toast.makeText(this, session.getKeyEmail() + "-" + session.getKeyName() + "-" + session.getKeyPassword(), Toast.LENGTH_SHORT).show();
+        dbHelper = new TimeTableDbHelper(this, null);
+        sessionManager = new SessionManager(this);
+        Toast.makeText(this, dbHelper.getColUserEmail() + " lala", Toast.LENGTH_SHORT).show();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
@@ -37,7 +39,7 @@ public class TeacherActivity extends AppCompatActivity implements View.OnClickLi
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        adapter = new TeacherRecyclerViewAdapter(new TimeTableDbHelper(this,null).getAllTeacher(session.getKeyEmail()));
+        adapter = new TeacherRecyclerViewAdapter(new TimeTableDbHelper(this,null).getAllTeacher(dbHelper.getColUserEmail()));
         rv.setAdapter(adapter);
         bu = findViewById(R.id.fab);
         bu.setOnClickListener(this);
@@ -70,7 +72,7 @@ public class TeacherActivity extends AppCompatActivity implements View.OnClickLi
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        adapter = new TeacherRecyclerViewAdapter(new TimeTableDbHelper(this,null).getAllTeacher(session.getKeyEmail()));
+        adapter = new TeacherRecyclerViewAdapter(new TimeTableDbHelper(this,null).getAllTeacher(dbHelper.getColUserEmail()));
         rv.setAdapter(adapter);
         bu = findViewById(R.id.fab);
         bu.setOnClickListener(this);

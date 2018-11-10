@@ -14,14 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
+import com.example.buchin.jadwalbuchin.SessionManager;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 
 public class MondayFragment extends Fragment {
     RecyclerView rv;
     FloatingActionButton bu;
-    Session session;
+    SessionManager sessionManager;
+    TimeTableDbHelper dbHelper;
     Context context;
     ScheduleRecyclerViewAdapter adapter;
     String day = "Monday";
@@ -41,12 +42,12 @@ public class MondayFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        session = new Session(context);
+        dbHelper = new TimeTableDbHelper(context, null);
         rv = getActivity().findViewById(R.id.list_schedule);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         rv.setLayoutManager(llm);
-        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(session.getKeyEmail(),day));
+        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),day));
         rv.setAdapter(adapter);
         bu = getActivity().findViewById(R.id.fab);
         bu.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +64,12 @@ public class MondayFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        session = new Session(context);
+        //session = new Session(context);
         rv = getActivity().findViewById(R.id.list_schedule);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         rv.setLayoutManager(llm);
-        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(session.getKeyEmail(),day));
+        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),day));
         rv.setAdapter(adapter);
         bu = getActivity().findViewById(R.id.fab);
         bu.setOnClickListener(new View.OnClickListener() {

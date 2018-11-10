@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case android.R.id.home:
                 dbHelper = new TimeTableDbHelper(activity, null);
-                dbHelper.getWritableDatabase();
+                //dbHelper.getWritableDatabase();
                 mDrawerLayout.openDrawer(GravityCompat.START);
 
                 textViewEmail = findViewById(R.id.header_title_2);
@@ -120,9 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_teachers:
                 startActivity(new Intent(this, TeacherActivity.class));
                 break;
-            case R.id.nav_grades:
-                startActivity(new Intent(this, GradeActivity.class));
-                break;
             case R.id.nav_holidays:
                 startActivity(new Intent(this, HolidayActivity.class));
                 break;
@@ -131,9 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_homeworks:
                 startActivity(new Intent(this, HomeWorkActivity.class));
-                break;
-            case R.id.nav_tests:
-                startActivity(new Intent(this, TestActivity.class));
                 break;
             case R.id.nav_logout:
                 logOut();

@@ -7,9 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.buchin.jadwalbuchin.FragmentHari.Schedule_Model;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TimeTableDbHelper extends SQLiteOpenHelper {
 
@@ -102,6 +104,7 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         // create new tables
         onCreate(db);
     }
@@ -116,6 +119,7 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         values.put(COL_EMAIL, teacher.getEmail());
         values.put(COL_OFFICE, teacher.getOffice());
         values.put(COL_OFFICEHOURS, teacher.getOfficeHours());
+        values.put(COL_USER, teacher.getUser_Email());
 
         // insert row
         long sequence = db.insert(TABLE_TEACHER, null, values);
@@ -199,11 +203,13 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         String username = "";
         Cursor cursor = this.getReadableDatabase().query(TABLE_USER, new String[]{COL_USER_EMAIL}, null, null, null, null, null);
         int cursorCount = cursor.getCount();
+
         if (cursorCount > 0){
             cursor.moveToFirst();
-            do{
-                username = cursor.getString(0);
-            }while (cursor.moveToNext());
+            username = cursor.getString(0);
+//            do{
+//                username = cursor.getString(0);
+//            }while (cursor.moveToNext());
         }
         cursor.close();
         return username;

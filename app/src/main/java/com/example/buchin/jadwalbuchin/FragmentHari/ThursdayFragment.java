@@ -14,17 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 
 public class ThursdayFragment extends Fragment {
-    RecyclerView rv;
-    FloatingActionButton bu;
-    Session session;
-    Context context;
-    ScheduleRecyclerViewAdapter adapter;
-    String day = "Thursday";
+//    RecyclerView rv;
+//    FloatingActionButton bu;
+//    Session session;
+//    Context context;
+//    ScheduleRecyclerViewAdapter adapter;
+//    String day = "Thursday";
     public ThursdayFragment() {
         // Required empty public constructor
     }
@@ -38,7 +37,7 @@ public class ThursdayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        context = container.getContext();
+        //context = container.getContext();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_thursday, container, false);
     }

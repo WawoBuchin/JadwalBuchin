@@ -16,7 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Session;
+import com.example.buchin.jadwalbuchin.SessionManager;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 import java.util.Calendar;
@@ -28,14 +28,16 @@ public class Edit_Schedule extends AppCompatActivity implements View.OnClickList
     String teacher,id,teacher_name,string_From,string_To;
     EditText et_SubjectName,et_SubjectRoom;
     FloatingActionButton fabUpdateSchedule;
-    Session session;
+    SessionManager sessionManager;
     TimeTableDbHelper dbAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_schedule);
 
-        session = new Session(Edit_Schedule.this);
+
+        sessionManager = new SessionManager(this);
+        //session = new Session(Edit_Schedule.this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
@@ -110,11 +112,10 @@ public class Edit_Schedule extends AppCompatActivity implements View.OnClickList
 
 
     private void loadSpinnerData(){
-        // database handler
-        TimeTableDbHelper db = new TimeTableDbHelper(this,null);
+
 
         // Spinner Drop down elements
-        List<String> lables = db.getAllTeachers(session.getKeyEmail());
+        List<String> lables = dbAdapter.getAllTeachers(dbAdapter.getColUserEmail());
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,

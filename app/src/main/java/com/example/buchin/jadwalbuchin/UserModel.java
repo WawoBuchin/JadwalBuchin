@@ -14,9 +14,9 @@ public class UserModel {
     //String Foto;
 
 
-    public UserModel(String userPassword, String userEmail) {
-        UserPassword = userPassword;
+    public UserModel( String userEmail, String userPassword) {
         UserEmail = userEmail;
+        UserPassword = userPassword;
     }
 
     public String getUserPassword() {

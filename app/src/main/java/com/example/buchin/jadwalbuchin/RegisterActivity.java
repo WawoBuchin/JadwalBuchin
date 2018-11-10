@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(userName.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()){
                     Toast.makeText(this, "Please fill the empty fields", Toast.LENGTH_SHORT).show();
                 }else{
-                    session.storeUser(userName, userEmail, userPassword);
+                    //session.storeUser(userName, userEmail, userPassword);
                     UserModel user = new UserModel(userName, userEmail, userPassword);
                     db.insertUser(user);
                     Intent i = new Intent(RegisterActivity.this, LoginActivity.class);

@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void sessionLogin(String loginUserEmail, String loginUserPassword) {
-        UserModel user = new UserModel(loginUserPassword, loginUserEmail);
+        UserModel user = new UserModel(loginUserEmail, loginUserPassword);
         if (loginUserEmail.equalsIgnoreCase(user.getUserEmail())&& loginUserPassword.equalsIgnoreCase(user.getUserPassword())){
             session.loginUserId(user.getUserEmail(), user.getUserPassword(), true);
             Intent i = new Intent(this, MainActivity.class);

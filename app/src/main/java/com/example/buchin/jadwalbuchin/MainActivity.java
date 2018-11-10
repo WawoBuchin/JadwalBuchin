@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawerLayout;
     Session session;
+    TimeTableDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         session = new Session(MainActivity.this);
         session.checkLogin();
+
+        dbHelper = new TimeTableDbHelper(this,null);
+        dbHelper.getWritableDatabase();
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         TabItem tabMonday = findViewById(R.id.monday_tab);

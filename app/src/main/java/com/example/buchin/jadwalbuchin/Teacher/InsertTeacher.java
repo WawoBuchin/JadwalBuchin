@@ -10,16 +10,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.R;
+import com.example.buchin.jadwalbuchin.Session;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 public class InsertTeacher extends AppCompatActivity implements View.OnClickListener {
     EditText txtName, txtPost, txtPhone, txtEmail, txtOffice,txtOfficeHour;
     FloatingActionButton fabSimpan;
+    Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_teacher);
 
+        session = new Session(InsertTeacher.this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
@@ -49,7 +52,7 @@ public class InsertTeacher extends AppCompatActivity implements View.OnClickList
                 String office = txtOffice.getText().toString();
                 String officehour = txtOfficeHour.getText().toString();
 
-                TeacherModel teacher = new TeacherModel(name,post,phone,email,office,officehour);
+                TeacherModel teacher = new TeacherModel(session.getKeyEmail(),name,post,phone,email,office,officehour);
                 if(dbAdapter.insertTeacher(teacher) != -1){
                     Toast.makeText(getBaseContext(),"Data Saved",Toast.LENGTH_SHORT).show();
                     //kosongkanData();

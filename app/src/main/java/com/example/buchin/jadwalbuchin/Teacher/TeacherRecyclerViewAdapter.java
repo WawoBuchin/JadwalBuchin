@@ -23,10 +23,27 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
     private ArrayList<TeacherModel> listTeacher;
     private OnItemClickListener listener;
 
-    //untuk popupmenu
     Context context;
 
+    public class ViewHolder extends  RecyclerView.ViewHolder {
+        TextView tvNama,tvPost,tvemail,tvhp,tvoffice,tvofficehour,tool;
+        String id;
+        TeacherModel teacher;
+        //pengisian variabel
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            id = "";
 
+            teacher = new TeacherModel();
+            tvNama = itemView.findViewById(R.id.tvnama);
+            tvPost = itemView.findViewById(R.id.tvpost);
+            tvemail = itemView.findViewById(R.id.tvemail);
+            tvhp = itemView.findViewById(R.id.tvhp);
+            tvoffice = itemView.findViewById(R.id.tvoffice);
+            tvofficehour = itemView.findViewById(R.id.tvofficehour);
+            tool = itemView.findViewById(R.id.tool);
+        }
+    }
 
     public TeacherRecyclerViewAdapter(ArrayList<TeacherModel> listTeacher) {
         this.listTeacher = listTeacher;
@@ -98,25 +115,7 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
         return listTeacher != null ? listTeacher.size() : 0;
     }
 
-    public class ViewHolder extends  RecyclerView.ViewHolder {
-        TextView tvNama,tvPost,tvemail,tvhp,tvoffice,tvofficehour,tool;
-        String id,nama,post,email,hp,office,officehour;
-        TeacherModel teacher;
-        //pengisian variabel
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            id = "";
 
-            teacher = new TeacherModel();
-            tvNama = itemView.findViewById(R.id.tvnama);
-            tvPost = itemView.findViewById(R.id.tvpost);
-            tvemail = itemView.findViewById(R.id.tvemail);
-            tvhp = itemView.findViewById(R.id.tvhp);
-            tvoffice = itemView.findViewById(R.id.tvoffice);
-            tvofficehour = itemView.findViewById(R.id.tvofficehour);
-            tool = itemView.findViewById(R.id.tool);
-        }
-    }
     public void setOnItemClickLister(OnItemClickListener listener){
         this.listener = listener;
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/edit_schedule"
+        android:title="Edit"/>
+    <item android:id="@+id/add_homework_schedule"
+        android:title="Add Homework" />
+    <item android:id="@+id/set_reminder_schedule"
+        android:title="Set Reminder" />
+    <item android:id="@+id/delete_schedule"
+        android:title="Delete" />
+</menu>

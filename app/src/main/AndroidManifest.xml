@@ -40,7 +40,9 @@
         <activity
             android:name=".Teacher.InsertTeacher"
             android:label="Add Teacher" />
-        <activity android:name=".Teacher.EditTeacher"></activity>
+        <activity android:name=".Teacher.EditTeacher" />
+        <activity android:name=".FragmentHari.Insert_Schedule" />
+        <activity android:name=".FragmentHari.Edit_Schedule"></activity>
     </application>
 
 </manifest>

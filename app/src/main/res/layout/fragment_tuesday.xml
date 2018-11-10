@@ -9,6 +9,17 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/tempat_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tuesday"/>
+        </LinearLayout>
     </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

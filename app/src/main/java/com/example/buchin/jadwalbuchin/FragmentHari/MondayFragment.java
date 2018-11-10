@@ -54,7 +54,6 @@ public class MondayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), Insert_Schedule.class);
-                i.putExtra("day",day);
                 getActivity().startActivity(i);
             }
         });

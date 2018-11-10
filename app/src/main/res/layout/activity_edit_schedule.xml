@@ -22,7 +22,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleTextColor="@color/colorWhite"></android.support.v7.widget.Toolbar>
 
-        <ScrollView
+        <RelativeLayout
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </RelativeLayout>
 
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton

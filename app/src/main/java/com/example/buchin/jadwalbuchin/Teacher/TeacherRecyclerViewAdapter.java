@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,8 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
     Context context;
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
-        TextView tvNama,tvPost,tvemail,tvhp,tvoffice,tvofficehour,tool;
+        TextView tvNama,tvPost,tvemail,tvhp,tvoffice,tvofficehour;
+        ImageView tool;
         String id;
         TeacherModel teacher;
         //pengisian variabel
@@ -78,7 +80,7 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
         viewHolder.tvofficehour.setText(listTeacher.get(position).getOfficeHours());
         viewHolder.id = listTeacher.get(position).getID_Teacher();
 
-        final TextView tvtool = viewHolder.tool;
+        final ImageView tvtool = viewHolder.tool;
         viewHolder.tool.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(context, tvtool);

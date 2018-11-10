@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class EditReminder extends AppCompatActivity implements View.OnClickListener {
     EditText txtTitle, txtDesc;
-    TextView txtDate, txtTime, txtColor;
+    TextView txtDate, txtTime;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
     FloatingActionButton fabSimpan;

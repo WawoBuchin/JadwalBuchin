@@ -14,12 +14,11 @@ import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.OnItemClickListener;
 import com.example.buchin.jadwalbuchin.R;
-import com.example.buchin.jadwalbuchin.Teacher.EditTeacher;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 import java.util.ArrayList;
 
-class ReminderRecyclerViewAdapter extends RecyclerView.Adapter<ReminderRecyclerViewAdapter.ViewHolder>  {
+public class ReminderRecycleViewAdapter extends RecyclerView.Adapter<ReminderRecycleViewAdapter.ViewHolder>  {
 
     private ArrayList<ReminderModel> listReminder;
     private OnItemClickListener listener;
@@ -29,7 +28,7 @@ class ReminderRecyclerViewAdapter extends RecyclerView.Adapter<ReminderRecyclerV
 
 
 
-    public ReminderRecyclerViewAdapter(ArrayList<ReminderModel> listReminder) {
+    public ReminderRecycleViewAdapter(ArrayList<ReminderModel> listReminder) {
         this.listReminder = listReminder;
     }
 
@@ -60,10 +59,10 @@ class ReminderRecyclerViewAdapter extends RecyclerView.Adapter<ReminderRecyclerV
         viewHolder.tvtime.setText(listReminder.get(position).getTime());
         viewHolder.id = listReminder.get(position).getID_Reminder();
 
-        final TextView tvtool = viewHolder.tool;
+        final TextView tool = viewHolder.tool;
         viewHolder.tool.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(context, tvtool);
+                PopupMenu popup = new PopupMenu(context, tool);
                 popup.inflate(R.menu.menu_teacher);
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

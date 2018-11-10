@@ -25,6 +25,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar">
+            <LinearLayout
+                android:id="@+id/tempatReminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listReminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </ScrollView>
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton

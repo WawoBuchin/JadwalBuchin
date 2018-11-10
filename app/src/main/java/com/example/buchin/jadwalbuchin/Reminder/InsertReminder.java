@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class InsertReminder extends AppCompatActivity implements View.OnClickListener {
     EditText txtTitle, txtDesc;
-    TextView txtDate, txtTime;
+    TextView txtDate, txtTime, txtColor;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
     FloatingActionButton fabSimpan;
@@ -65,6 +65,15 @@ public class InsertReminder extends AppCompatActivity implements View.OnClickLis
                 dialog.show();
             }
         });
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = month + "/" + day + "/" + year;
+                txtDate.setText(date);
+            }
+        };
+
         txtTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

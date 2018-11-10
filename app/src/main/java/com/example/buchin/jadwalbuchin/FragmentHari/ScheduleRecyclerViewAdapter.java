@@ -111,6 +111,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
     public ScheduleRecyclerViewAdapter(ArrayList<Schedule_Model> listSchedule) {
         this.listSchedule = listSchedule;
+
     }
 
     public void deleteItem(int position){

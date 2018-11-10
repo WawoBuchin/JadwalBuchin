@@ -44,7 +44,7 @@ public class TuesdayFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(context);
         rv.setLayoutManager(llm);
         day = "Tuesday";
-        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),"Tuesday"));
+        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),"Tuesday    "));
         rv.setAdapter(adapter);
         bu = getActivity().findViewById(R.id.fab);
         bu.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.buchin.jadwalbuchin.Homework.HomeWorkModel;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherModel;
 
 import java.util.ArrayList;
@@ -70,6 +71,20 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
             + " TEXT,"+ COL_POST + " TEXT," + COL_PHONE + " TEXT," + COL_EMAIL + " TEXT," + COL_OFFICE
             + " TEXT,"+ COL_OFFICEHOURS + " TEXT )";
 
+    // Homework Table - column names
+    private static final String COL_ID_Homework = "id_homework";
+    private static final String COL_TITLE = "title";
+    private static final String COL_TYPE = "type";
+    private static final String COL_DESCRIPT = "description";
+    private static final String COL_DATE = "date";
+    private static final String COL_STATUS = "status";
+
+
+    // user table create statement
+    private static final String CREATE_TABLE_HOMEWORK = " CREATE TABLE "
+            + TABLE_HOMEWORK + "(" + COL_ID_Homework + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_TITLE
+            + " TEXT,"+ COL_TYPE + " TEXT," + COL_DESCRIPT + " TEXT," + COL_DATE + " TEXT, "+ COL_STATUS + " TEXT )";
+
     public TimeTableDbHelper(Context context, SQLiteDatabase.CursorFactory factory){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -80,17 +95,19 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
         db.execSQL(CREATE_TABLE_TEACHER);
+        db.execSQL(CREATE_TABLE_HOMEWORK);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HOMEWORK);
 
         // create new tables
         onCreate(db);
     }
-
+    //TEACHER
     public long insertTeacher(TeacherModel teacher) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -153,6 +170,69 @@ public class TimeTableDbHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return new TeacherModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
                 cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
+
+    }
+    //HOMEWORK
+    public long insertHomework(HomeWorkModel homework) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COL_TITLE, homework.getTittle());
+        values.put(COL_TYPE, homework.getType());
+        values.put(COL_DESCRIPT, homework.getDescription());
+        values.put(COL_DATE, homework.getDate());
+        values.put(COL_STATUS, homework.getStatus());
+
+        // insert row
+        long sequence = db.insert(TABLE_HOMEWORK, null, values);
+
+
+        return sequence;
+    }
+    public ArrayList<HomeWorkModel> getAllHomework(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<HomeWorkModel> listHomework = new ArrayList<>();
+        String sql = " SELECT * FROM " + TABLE_HOMEWORK;
+        Cursor cursor = db.rawQuery(sql,null);
+        Log.d("haha", "kosong" + cursor.getCount());
+        if(cursor != null && cursor.moveToFirst()){
+
+            cursor.moveToFirst();
+            do{
+                listHomework.add(new HomeWorkModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                        cursor.getString(3),cursor.getString(4),cursor.getString(5)));
+            }while(cursor.moveToNext());
+        }
+        return listHomework;
+    }
+
+    public void deleteHomework(String id_Homework){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_HOMEWORK,"id_homework = ?", new String[]{id_Homework});
+    }
+
+    public void updateHomework(HomeWorkModel homework){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_TITLE, homework.getTittle());
+        values.put(COL_TYPE, homework.getType());
+        values.put(COL_DESCRIPT, homework.getDescription());
+        values.put(COL_DATE, homework.getDate());
+        values.put(COL_STATUS, homework.getStatus());
+
+        db.update(TABLE_HOMEWORK, values,"id_homework = ?" , new String[]{homework.getID_HomeWork()});
+        db.close();
+    }
+
+    public HomeWorkModel getDataHomework(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_HOMEWORK + " WHERE " + COL_ID_Homework + " = " + id ;
+        Cursor cursor = db.rawQuery(sql, null);
+
+        cursor.moveToFirst();
+        return new HomeWorkModel(cursor.getString(1),cursor.getString(2),cursor.getString(3),
+                cursor.getString(4));
 
     }
 }

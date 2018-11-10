@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Teacher.InsertTeacher">
+    tools:context=".Homework.EditHomework"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -18,8 +20,7 @@
             app:titleTextColor="@color/colorWhite"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true">
-        </android.support.v7.widget.Toolbar>
+            android:layout_alignParentEnd="true" />
 
         <ScrollView
             android:id="@+id/scroll_view"
@@ -30,10 +31,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -41,12 +44,12 @@
                         android:layout_margin="10dp">
 
                         <EditText
-                            android:id="@+id/itName"
+                            android:id="@+id/txtTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Name"
-                            android:inputType="" />
+                            android:hint="Title" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -54,11 +57,12 @@
                         android:layout_margin="10dp">
 
                         <EditText
-                            android:id="@+id/itPost"
+                            android:id="@+id/txtType"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Post"/>
+                            android:hint="Type"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -66,64 +70,40 @@
                         android:layout_margin="10dp">
 
                         <EditText
-                            android:id="@+id/itPhone"
+                            android:id="@+id/txtDesc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Phone"/>
+                            android:hint="Description" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_margin="10dp">
 
-                        <EditText
-                            android:id="@+id/itEmail"
+                        <TextView
+                            android:id="@+id/Date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Email"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/itOffice"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Office"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/itOfficehour"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Office Hours"/>
+                            android:text="SELECT DATE"
+                            android:textAlignment="center"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
-
         </ScrollView>
 
     </RelativeLayout>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_simpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
+        android:src="@drawable/ic_check_black_24dp"
         android:outlineAmbientShadowColor="@color/colorShadow"
         android:outlineSpotShadowColor="@color/colorShadow"
-        android:src="@drawable/ic_check_black_24dp"
         app:backgroundTint="@color/colorYellow"
         app:fabSize="normal" />
 </FrameLayout>

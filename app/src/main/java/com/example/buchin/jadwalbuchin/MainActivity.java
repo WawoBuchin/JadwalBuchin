@@ -13,16 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.buchin.jadwalbuchin.Homework.HomeWorkActivity;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-
+    TimeTableDbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new TimeTableDbHelper(this, null);
+        dbHelper.getWritableDatabase();
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         TabItem tabMonday = findViewById(R.id.monday_tab);

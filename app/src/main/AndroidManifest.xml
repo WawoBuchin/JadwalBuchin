@@ -30,7 +30,7 @@
             android:name=".ReminderActivity"
             android:label="Reminders" />
         <activity
-            android:name=".HomeWorkActivity"
+            android:name=".Homework.HomeWorkActivity"
             android:label="Homeworks" />
         <activity
             android:name=".TestActivity"
@@ -40,7 +40,13 @@
         <activity
             android:name=".Teacher.InsertTeacher"
             android:label="Add Teacher" />
-        <activity android:name=".Teacher.EditTeacher"></activity>
+        <activity
+            android:name=".Teacher.EditTeacher"
+            android:label="Edit Teacher" />
+        <activity
+            android:name=".Homework.InsertHomework"
+            android:label="Add Homework" />
+        <activity android:name=".Homework.EditHomework"></activity>
     </application>
 
 </manifest>

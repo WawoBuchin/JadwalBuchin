@@ -1,4 +1,4 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.Homework;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

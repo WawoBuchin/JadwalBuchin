@@ -41,6 +41,7 @@ public class InsertTeacher extends AppCompatActivity implements View.OnClickList
         if(view.getId() == R.id.fab_simpan){
             if(!txtName.getText().toString().equals("") && !txtPost.getText().toString().equals("") && !txtPhone.getText().toString().equals("")
                     && !txtEmail.getText().toString().equals("") && !txtOffice.getText().toString().equals("") && !txtOfficeHour.getText().toString().equals("")){
+
                 TimeTableDbHelper dbAdapter = new TimeTableDbHelper(getBaseContext(), null);
                 String name = txtName.getText().toString();
                 String post = txtPost.getText().toString();

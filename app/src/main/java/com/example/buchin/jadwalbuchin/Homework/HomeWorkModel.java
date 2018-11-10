@@ -1,28 +1,42 @@
-package com.example.buchin.jadwalbuchin;
+package com.example.buchin.jadwalbuchin.Homework;
 
 public class HomeWorkModel {
     String ID_HomeWork;
-    String Username;
     String Tittle;
     String Type;
     String Description;
     String Date;
     String Status;
-    String ID_Color;
 
-    public HomeWorkModel() {
-    }
+    public HomeWorkModel(String tittle, String type, String description, String date, String status) {
 
-    public HomeWorkModel(String ID_HomeWork, String username, String tittle, String type, String description, String date, String status, String ID_Color) {
-        this.ID_HomeWork = ID_HomeWork;
-        Username = username;
         Tittle = tittle;
         Type = type;
         Description = description;
         Date = date;
         Status = status;
-        this.ID_Color = ID_Color;
     }
+
+    public HomeWorkModel(String tittle, String type, String description, String date) {
+        Tittle = tittle;
+        Type = type;
+        Description = description;
+        Date = date;
+    }
+
+    public HomeWorkModel(String ID_HomeWork, String tittle, String type, String description, String date, String status) {
+        this.ID_HomeWork = ID_HomeWork;
+        Tittle = tittle;
+        Type = type;
+        Description = description;
+        Date = date;
+        Status = status;
+    }
+
+    public HomeWorkModel() {
+
+    }
+
 
     public String getID_HomeWork() {
         return ID_HomeWork;
@@ -30,14 +44,6 @@ public class HomeWorkModel {
 
     public void setID_HomeWork(String ID_HomeWork) {
         this.ID_HomeWork = ID_HomeWork;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
     }
 
     public String getTittle() {
@@ -80,11 +86,4 @@ public class HomeWorkModel {
         Status = status;
     }
 
-    public String getID_Color() {
-        return ID_Color;
-    }
-
-    public void setID_Color(String ID_Color) {
-        this.ID_Color = ID_Color;
-    }
 }

@@ -5,10 +5,6 @@
             android:title="@string/teachers"
             android:icon="@drawable/ic_people_grey_24dp" />
 
-        <item android:id="@+id/nav_grades"
-            android:title="@string/grades"
-            android:icon="@drawable/ic_grade_grey_24dp" />
-
         <item android:id="@+id/nav_holidays"
             android:title="@string/holidays"
             android:icon="@drawable/ic_wb_sunny_grey_24dp" />
@@ -20,10 +16,6 @@
         <item android:id="@+id/nav_homeworks"
             android:title="@string/homeworks"
             android:icon="@drawable/ic_edit_grey_24dp" />
-
-        <item android:id="@+id/nav_tests"
-            android:title="@string/tests"
-            android:icon="@drawable/ic_description_grey_24dp" />
 
     </group>
     <group

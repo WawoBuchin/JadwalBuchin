@@ -1,52 +1,51 @@
 package com.example.buchin.jadwalbuchin;
 
 public class UserModel {
-    String Username;
-    String Password;
-    String Name;
-    String Email;
-    //String Foto;
+    private int UserId;
+    private String UserName;
+    private String UserEmail;
+    private String UserPassword;
 
+    public UserModel(){
 
-    public UserModel() {
     }
 
-    public UserModel(String username, String password, String name, String email) {
-        Username = username;
-        Password = password;
-        Name = name;
-        Email = email;
+    public UserModel(int userId, String userName, String userEmail, String userPassword) {
+        UserId = userId;
+        UserName = userName;
+        UserEmail = userEmail;
+        UserPassword = userPassword;
     }
 
-    public String getUsername() {
-        return Username;
+    public int getUserId() {
+        return UserId;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public void setUserId(int userId) {
+        UserId = userId;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
-    public String getNama() {
-        return Name;
+    public String getUserEmail() {
+        return UserEmail;
     }
 
-    public void setNama(String name) {
-        Name = name;
+    public void setUserEmail(String userEmail) {
+        UserEmail = userEmail;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getUserPassword() {
+        return UserPassword;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setUserPassword(String userPassword) {
+        UserPassword = userPassword;
     }
 }

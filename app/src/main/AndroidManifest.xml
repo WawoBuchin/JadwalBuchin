@@ -24,13 +24,13 @@
             android:name=".Teacher.TeacherActivity"
             android:label="Teachers" />
         <activity
-            android:name=".GradeActivity"
+            android:name=".ReminderActivity"
             android:label="Average: " />
         <activity
-            android:name=".ReminderActivity"
+            android:name=".Reminder.ReminderActivity"
             android:label="Reminders" />
         <activity
-            android:name=".Homework.HomeWorkActivity"
+            android:name=".HomeWorkActivity"
             android:label="Homeworks" />
         <activity
             android:name=".TestActivity"
@@ -47,6 +47,12 @@
             android:name=".Homework.InsertHomework"
             android:label="Add Homework" />
         <activity android:name=".Homework.EditHomework"></activity>
+        <activity android:name=".Teacher.EditTeacher" />
+        <activity android:name=".FragmentHari.Insert_Schedule" />
+        <activity android:name=".FragmentHari.Edit_Schedule"></activity>
+        <activity android:name=".Teacher.EditTeacher" />
+        <activity android:name=".Reminder.InsertReminder" />
+        <activity android:name=".Reminder.EditReminder"></activity>
     </application>
 
 </manifest>

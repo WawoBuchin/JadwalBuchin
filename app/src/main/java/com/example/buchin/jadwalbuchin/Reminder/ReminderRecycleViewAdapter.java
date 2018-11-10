@@ -1,4 +1,4 @@
-package com.example.buchin.jadwalbuchin.Teacher;
+package com.example.buchin.jadwalbuchin.Reminder;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,50 +9,32 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.OnItemClickListener;
 import com.example.buchin.jadwalbuchin.R;
+import com.example.buchin.jadwalbuchin.Teacher.EditTeacher;
 import com.example.buchin.jadwalbuchin.TimeTableDbHelper;
 
 import java.util.ArrayList;
 
-public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecyclerViewAdapter.ViewHolder>  {
+class ReminderRecyclerViewAdapter extends RecyclerView.Adapter<ReminderRecyclerViewAdapter.ViewHolder>  {
 
-    private ArrayList<TeacherModel> listTeacher;
+    private ArrayList<ReminderModel> listReminder;
     private OnItemClickListener listener;
 
+    //untuk popupmenu
     Context context;
 
-    public class ViewHolder extends  RecyclerView.ViewHolder {
-        TextView tvNama,tvPost,tvemail,tvhp,tvoffice,tvofficehour;
-        ImageView tool;
-        String id;
-        TeacherModel teacher;
-        //pengisian variabel
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            id = "";
 
-            teacher = new TeacherModel();
-            tvNama = itemView.findViewById(R.id.tvnama);
-            tvPost = itemView.findViewById(R.id.tvpost);
-            tvemail = itemView.findViewById(R.id.tvemail);
-            tvhp = itemView.findViewById(R.id.tvhp);
-            tvoffice = itemView.findViewById(R.id.tvoffice);
-            tvofficehour = itemView.findViewById(R.id.tvofficehour);
-            tool = itemView.findViewById(R.id.tool);
-        }
-    }
 
-    public TeacherRecyclerViewAdapter(ArrayList<TeacherModel> listTeacher) {
-        this.listTeacher = listTeacher;
+    public ReminderRecyclerViewAdapter(ArrayList<ReminderModel> listReminder) {
+        this.listReminder = listReminder;
     }
 
     public void deleteItem(int position){
-        listTeacher.remove(position);
+        listReminder.remove(position);
         notifyDataSetChanged();
     }
 
@@ -62,7 +44,7 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         context = parent.getContext();
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_teacher, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reminder, parent, false);
         return new ViewHolder(v);
     }
 
@@ -72,15 +54,13 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
 
         final TimeTableDbHelper dbhelper = new TimeTableDbHelper(context,null);
 
-        viewHolder.tvNama.setText(listTeacher.get(position).getName());
-        viewHolder.tvPost.setText(listTeacher.get(position).getPost());
-        viewHolder.tvemail.setText(listTeacher.get(position).getEmail());
-        viewHolder.tvhp.setText(listTeacher.get(position).getPhone());
-        viewHolder.tvoffice.setText(listTeacher.get(position).getOffice());
-        viewHolder.tvofficehour.setText(listTeacher.get(position).getOfficeHours());
-        viewHolder.id = listTeacher.get(position).getID_Teacher();
+        viewHolder.tvtitle.setText(listReminder.get(position).getTittle());
+        viewHolder.tvdesc.setText(listReminder.get(position).getDescription());
+        viewHolder.tvdate.setText(listReminder.get(position).getDate());
+        viewHolder.tvtime.setText(listReminder.get(position).getTime());
+        viewHolder.id = listReminder.get(position).getID_Reminder();
 
-        final ImageView tvtool = viewHolder.tool;
+        final TextView tvtool = viewHolder.tool;
         viewHolder.tool.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(context, tvtool);
@@ -90,7 +70,7 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.edit:
-                                Intent intent = new Intent (context, EditTeacher.class);
+                                Intent intent = new Intent (context, EditReminder.class);
                                 intent.putExtra("id",viewHolder.id);
                                 context.startActivity(intent);
                                 //dbhelper.updateTeacher(viewHolder.teacher);
@@ -98,7 +78,7 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
 
                                 return true;
                             case R.id.delete:
-                                dbhelper.deleteTeacher(viewHolder.id);
+                                dbhelper.deleteReminder(viewHolder.id);
                                 deleteItem(viewHolder.getAdapterPosition());
                                 Toast.makeText(context,"delete",Toast.LENGTH_SHORT).show();
                                 return true;
@@ -108,16 +88,32 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
                 });
                 popup.show();
             }
-            });
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return listTeacher != null ? listTeacher.size() : 0;
+        return listReminder != null ? listReminder.size() : 0;
     }
 
+    public class ViewHolder extends  RecyclerView.ViewHolder {
+        TextView tvtitle,tvdesc,tvdate,tvtime, tool;
+        String id,title,desc,date,time;
+        ReminderModel reminder;
+        //pengisian variabel
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            id = "";
 
+            reminder = new ReminderModel();
+            tvtitle = itemView.findViewById(R.id.tvtitle);
+            tvdesc = itemView.findViewById(R.id.tvdesc);
+            tvdate = itemView.findViewById(R.id.tvdate);
+            tvtime = itemView.findViewById(R.id.tvtime);
+            tool = itemView.findViewById(R.id.tool);
+        }
+    }
     public void setOnItemClickLister(OnItemClickListener listener){
         this.listener = listener;
     }

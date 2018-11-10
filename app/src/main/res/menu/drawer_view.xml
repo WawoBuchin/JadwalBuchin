@@ -5,10 +5,6 @@
             android:title="@string/teachers"
             android:icon="@drawable/ic_people_grey_24dp" />
 
-        <item android:id="@+id/nav_grades"
-            android:title="@string/grades"
-            android:icon="@drawable/ic_grade_grey_24dp" />
-
         <item android:id="@+id/nav_holidays"
             android:title="@string/holidays"
             android:icon="@drawable/ic_wb_sunny_grey_24dp" />
@@ -21,16 +17,12 @@
             android:title="@string/homeworks"
             android:icon="@drawable/ic_edit_grey_24dp" />
 
-        <item android:id="@+id/nav_tests"
-            android:title="@string/tests"
-            android:icon="@drawable/ic_description_grey_24dp" />
-
-        <item android:id="@+id/nav_login"
-            android:title="@string/login"
-            android:icon="@drawable/ic_delete_white_24dp"/>
-
-        <item android:id="@+id/nav_register"
-            android:title="@string/register"
+    </group>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item android:id="@+id/nav_logout"
+            android:title="@string/logout"
             android:icon="@drawable/ic_delete_white_24dp"/>
     </group>
 </menu>

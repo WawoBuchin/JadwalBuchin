@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Teacher.EditTeacher">
+    tools:context=".Reminder.InsertReminder">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,7 +20,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true">
         </android.support.v7.widget.Toolbar>
-
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
@@ -41,13 +40,14 @@
                         android:layout_margin="10dp">
 
                         <EditText
-                            android:id="@+id/etName"
+                            android:id="@+id/itTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_person_black_24dp"
-                            android:drawablePadding="10dp"
-                            android:hint="Name"
-                            android:inputType="" />
+                            android:drawableStart="@drawable/ic_import_contacts_black_24dp"
+                            android:drawablePadding="24dp"
+                            android:hint="Title"
+                            android:inputType=""
+                            android:textSize="20sp" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -56,12 +56,13 @@
                         android:layout_margin="10dp">
 
                         <EditText
-                            android:id="@+id/etPost"
+                            android:id="@+id/itDesc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_chrome_reader_mode_black_24dp"
-                            android:drawablePadding="10dp"
-                            android:hint="Post" />
+                            android:drawableStart="@drawable/ic_description_grey_24dp"
+                            android:drawablePadding="24dp"
+                            android:hint="Description"
+                            android:textSize="20sp" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -69,13 +70,25 @@
                         android:orientation="horizontal"
                         android:layout_margin="10dp">
 
-                        <EditText
-                            android:id="@+id/etPhone"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_phone_black_24dp"
-                            android:drawablePadding="10dp"
-                            android:hint="Phone" />
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="Date :"
+                            android:textAlignment="viewStart"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="55dp"
+                            android:hint="Select Date"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -83,41 +96,24 @@
                         android:orientation="horizontal"
                         android:layout_margin="10dp">
 
-                        <EditText
-                            android:id="@+id/etEmail"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_mail_outline_black_24dp"
-                            android:drawablePadding="10dp"
-                            android:hint="Email" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="Time"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/etOffice"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_work_black_24dp"
-                            android:drawablePadding="10dp"
-                            android:hint="Office" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-
-                        <EditText
-                            android:id="@+id/etOfficehour"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_access_time_black_24dp"
-                            android:drawablePadding="10dp"
-                            android:hint="Office Hours" />
+                            android:layout_marginRight="52dp"
+                            android:hint="Select Time"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 

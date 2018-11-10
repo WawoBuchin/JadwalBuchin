@@ -5,80 +5,76 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    android:background="@drawable/ic_round_white"
-    android:outlineAmbientShadowColor="@color/colorShadow"
-    android:outlineSpotShadowColor="@color/colorShadow">
+    android:background="@color/colorPrimary">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_person_black_24dp"/>
+            android:src="@drawable/ic_notifications_active_black_24dp" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:orientation="vertical">
+
             <TextView
-                android:id="@+id/tvnama"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/tvpost"
+                android:id="@+id/tvtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="10sp"/>
+                android:fontFamily="sans-serif"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
-
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tool"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity ="center"
-
-            >
-
-            <ImageView
-                android:id="@+id/tool"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_more_vert_black_24dp" />
-        </LinearLayout>
+            android:background="@drawable/ic_more_vert_black_24dp" />
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="?android:attr/listDivider" />
+
     <TextView
-        android:id="@+id/tvhp"
+        android:id="@+id/tvdesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="lala"/>
+        android:text="lala"
+        android:textSize="16sp" />
+
     <TextView
-        android:id="@+id/tvemail"
+        android:id="@+id/tvdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="lala"/>
+        android:text="lala"
+        android:textSize="16sp" />
+
     <TextView
-        android:id="@+id/tvoffice"
+        android:id="@+id/tvtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="lala"/>
-    <TextView
-        android:id="@+id/tvofficehour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="lala"/>
+        android:text="lala"
+        android:textSize="16sp" />
+
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.buchin.jadwalbuchin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabItem;
@@ -12,18 +13,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.Homework.HomeWorkActivity;
+import com.example.buchin.jadwalbuchin.Reminder.ReminderActivity;
 import com.example.buchin.jadwalbuchin.Teacher.TeacherActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    private Activity activity = MainActivity.this;
     private DrawerLayout mDrawerLayout;
     TimeTableDbHelper dbHelper;
+
+    SessionManager sessionManager;
+    TimeTableDbHelper dbHelper;
+    private TextView textViewEmail, textViewName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper = new TimeTableDbHelper(activity, null);
+        dbHelper.getWritableDatabase();
+        sessionManager = new SessionManager(this);
+        Toast.makeText(activity, "", Toast.LENGTH_SHORT).show();
+        if (!sessionManager.loggedIn()){
+            Toast.makeText(activity, "You Are Not Logged In", Toast.LENGTH_SHORT).show();
+            logOut();
+        }else{
+            Toast.makeText(activity, "You Are Logged In", Toast.LENGTH_SHORT).show();
+        }
+
 
         dbHelper = new TimeTableDbHelper(this, null);
         dbHelper.getWritableDatabase();
@@ -50,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*String emailFromIntent = getIntent().getStringExtra("EMAIL");
+        textViewEmail.setText(emailFromIntent);*/
+
         /*
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -66,18 +91,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         );*/
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                dbHelper = new TimeTableDbHelper(activity, null);
+                //dbHelper.getWritableDatabase();
                 mDrawerLayout.openDrawer(GravityCompat.START);
 
+                textViewEmail = findViewById(R.id.header_title_2);
+
+                textViewName = findViewById(R.id.header_title_1);
+
+                textViewEmail.setText(dbHelper.getColUserEmail());
+                textViewName.setText(dbHelper.getColUserName());
+
+
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -88,9 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_teachers:
                 startActivity(new Intent(this, TeacherActivity.class));
                 break;
-            case R.id.nav_grades:
-                startActivity(new Intent(this, GradeActivity.class));
-                break;
             case R.id.nav_holidays:
                 startActivity(new Intent(this, HolidayActivity.class));
                 break;
@@ -100,16 +134,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_homeworks:
                 startActivity(new Intent(this, HomeWorkActivity.class));
                 break;
-            case R.id.nav_tests:
-                startActivity(new Intent(this, TestActivity.class));
-                break;
-            case R.id.nav_login:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-            case R.id.nav_register:
-                startActivity(new Intent(this, RegisterActivity.class));
+            case R.id.nav_logout:
+                logOut();
                 break;
         }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,5 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private void logOut(){
+        sessionManager.setLoggedIn(false);
+        finish();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    }
 
 }

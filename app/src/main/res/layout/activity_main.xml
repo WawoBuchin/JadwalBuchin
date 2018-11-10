@@ -91,4 +91,17 @@
             app:menu="@menu/drawer_view"
             app:headerLayout="@layout/nav_header"/>
     </android.support.v4.widget.DrawerLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add_white_24dp"
+        android:outlineAmbientShadowColor="@color/colorShadow"
+        android:outlineSpotShadowColor="@color/colorShadow"
+        app:backgroundTint="@color/colorYellow"
+        app:fabSize="normal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.buchin.jadwalbuchin;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.buchin.jadwalbuchin.FragmentHari.FridayFragment;
 import com.example.buchin.jadwalbuchin.FragmentHari.MondayFragment;
@@ -50,6 +52,8 @@ public class PageAdapter extends FragmentPagerAdapter {
         return super.getPageTitle(position);*/
         switch (position){
             case 0:
+                //Log.i("lala","senin");
+                //Toast.makeText(getBaseContext(),"please fill in the empty field",Toast.LENGTH_SHORT).show();
                 return "Monday";
             case 1:
                 return "Tuesday";

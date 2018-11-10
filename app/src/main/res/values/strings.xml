@@ -7,6 +7,14 @@
     <string name="reminders">Reminders</string>
     <string name="homeworks">Homeworks</string>
     <string name="tests">Tests</string>
+    <string-array name="day">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>

@@ -23,7 +23,7 @@ public class TuesdayFragment extends Fragment {
     TimeTableDbHelper dbHelper;
     Context context;
     ScheduleRecyclerViewAdapter adapter;
-    String day = "Tuesday";
+    String day;
     public TuesdayFragment() {
         // Required empty public constructor
     }
@@ -43,14 +43,14 @@ public class TuesdayFragment extends Fragment {
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         rv.setLayoutManager(llm);
-        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),day));
+        day = "Tuesday";
+        adapter = new ScheduleRecyclerViewAdapter(new TimeTableDbHelper(context,null).getAllSchedule(dbHelper.getColUserEmail(),"Tuesday"));
         rv.setAdapter(adapter);
         bu = getActivity().findViewById(R.id.fab);
         bu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), Insert_Schedule.class);
-                i.putExtra("day",day);
                 getActivity().startActivity(i);
             }
         });

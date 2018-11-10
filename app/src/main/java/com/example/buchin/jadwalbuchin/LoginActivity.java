@@ -1,69 +1,119 @@
 package com.example.buchin.jadwalbuchin;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+    //Activity
+    private final Activity activity = LoginActivity.this;
+    //Layout
+    private LinearLayout linearLayout;
+    //TextInputLayout
+    private TextInputLayout textInputLayoutEmail;
+    private TextInputLayout textInputLayoutPassword;
+    //TextInputEditText
+    private TextInputEditText textInputEditTextEmail;
+    private TextInputEditText textInputEditTextPassword;
+    //AppCompatButton
+    private AppCompatButton appCompatButtonLogin;
+    private AppCompatButton appCompatButtonRegisterNow;
+    //Objects
+    private InputValidation inputValidation;
+    private TimeTableDbHelper dbHelper;
+    private UserModel user;
+    private SessionManager sessionManager;
 
-    EditText etLoginEmail, etLoginPassword;
-    Session session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Button bRegister = (Button)findViewById(R.id.btn_register_now);
-        Button bLogin = (Button)findViewById(R.id.btn_login);
-        etLoginEmail = (EditText)findViewById(R.id.email);
-        etLoginPassword = (EditText)findViewById(R.id.password);
-        bRegister.setOnClickListener(this);
-        bLogin.setOnClickListener(this);
+        initViews();
+        initListeners();
+        initObjects();
 
-        session = new Session(LoginActivity.this);
+        if (sessionManager.loggedIn()){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+
+    }
+
+    private void initViews(){
+        //Layout
+        linearLayout = (LinearLayout)findViewById(R.id.linearLayout);
+        //TextInputLayout
+        textInputLayoutEmail = (TextInputLayout)findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutPassword = (TextInputLayout)findViewById(R.id.textInputLayoutPassword);
+        //TextInputEditText
+        textInputEditTextEmail = (TextInputEditText)findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextPassword = (TextInputEditText)findViewById(R.id.textInputEditTextPassword);
+        //AppCompatButton
+        appCompatButtonLogin = (AppCompatButton)findViewById(R.id.appCompatButtonLogin);
+        appCompatButtonRegisterNow = (AppCompatButton)findViewById(R.id.appCompatButtonRegisterNow);
+    }
+
+    private void initListeners(){
+        appCompatButtonRegisterNow.setOnClickListener(this);
+        appCompatButtonLogin.setOnClickListener(this);
+    }
+
+    private void initObjects(){
+        dbHelper = new TimeTableDbHelper(activity, null);
+        inputValidation = new InputValidation(activity);
+        sessionManager = new SessionManager(activity);
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_register_now :
-                startActivity(new Intent(this, RegisterActivity.class));
+            case R.id.appCompatButtonLogin:
+                verifyFromSQLite();
                 break;
-            case R.id.btn_login:
-                TimeTableDbHelper db = new TimeTableDbHelper(this, null);
-                String loginUserEmail = etLoginEmail.getText().toString().trim();
-                String loginUserPassword = etLoginPassword.getText().toString().trim();
-                if(loginUserEmail.isEmpty() || loginUserPassword.isEmpty()){
-                    Toast.makeText(this, "Please Fill in the blank field", Toast.LENGTH_SHORT).show();
-                }else{
-                    sessionLogin(loginUserEmail, loginUserPassword);
-                }
+            case R.id.appCompatButtonRegisterNow:
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
                 break;
         }
     }
 
-    private void sessionLogin(String loginUserEmail, String loginUserPassword) {
-        UserModel user = new UserModel(loginUserPassword, loginUserEmail);
-        if (loginUserEmail.equalsIgnoreCase(user.getUserEmail())&& loginUserPassword.equalsIgnoreCase(user.getUserPassword())){
-            session.loginUserId(user.getUserEmail(), user.getUserPassword(), true);
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            this.finish();
-        }else{
-            Toast.makeText(this, "Wrong Email or Password!", Toast.LENGTH_SHORT).show();
+    private void verifyFromSQLite(){
+        if(!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))){
+            return;
         }
-        /*if(loginUserEmail.equalsIgnoreCase(session.getKeyEmail()) && loginUserPassword.equalsIgnoreCase(session.getKeyPassword())){
-            session.loginUserId(loginUserEmail, loginUserPassword, true);
-            Intent i = new Intent(this, MainActivity.class);
+        if(!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))){
+            return;
+        }
+        if(!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))){
+            return;
+        }
+
+        if(dbHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())){
+            Intent i = new Intent(activity, MainActivity.class);
+            i.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            emptyInputEditText();
             startActivity(i);
+            sessionManager.setLoggedIn(true);
             this.finish();
         }else{
-            Toast.makeText(this, "Wrong Email or Password!", Toast.LENGTH_SHORT).show();
-        }*/
+            Snackbar.make(linearLayout, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    private void emptyInputEditText(){
+        textInputEditTextEmail.setText(null);
+        textInputEditTextPassword.setText(null);
     }
 
 }

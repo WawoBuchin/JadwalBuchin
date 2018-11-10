@@ -24,4 +24,8 @@ public class GradeActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    public static class InputValidation {
+
+    }
 }
